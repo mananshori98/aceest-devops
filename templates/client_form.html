@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block title %}{{ 'Edit' if edit else 'New' }} Client - ACEest{% endblock %}
+{% block content %}
+<h1 class="h3 mb-3">{{ 'Edit ' ~ client_name if edit else 'New Client' }}</h1>
+{% if error %}
+<div class="alert alert-danger">{{ error }}</div>
+{% endif %}
+<form method="post">
+  {% if not edit %}
+  <div class="mb-3">
+    <label class="form-label" for="name">Name</label>
+    <input class="form-control" id="name" name="name" value="{{ form.get('name', '') }}" required>
+  </div>
+  {% endif %}
+  <div class="row">
+    <div class="col-md-4 mb-3">
+      <label class="form-label" for="age">Age</label>
+      <input class="form-control" type="number" id="age" name="age" value="{{ form.get('age') or '' }}">
+    </div>
+    <div class="col-md-4 mb-3">
+      <label class="form-label" for="height">Height (cm)</label>
+      <input class="form-control" type="number" step="any" id="height" name="height" value="{{ form.get('height') or '' }}">
+    </div>
+    <div class="col-md-4 mb-3">
+      <label class="form-label" for="weight">Weight (kg)</label>
+      <input class="form-control" type="number" step="any" id="weight" name="weight" value="{{ form.get('weight') or '' }}">
+    </div>
+  </div>
+  <div class="mb-3">
+    <label class="form-label" for="program">Program</label>
+    <select class="form-select" id="program" name="program">
+      <option value="">-- select --</option>
+      {% for p in programs %}
+      <option value="{{ p }}" {{ 'selected' if form.get('program') == p else '' }}>{{ p }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <label class="form-label" for="target_weight">Target Weight (kg)</label>
+      <input class="form-control" type="number" step="any" id="target_weight" name="target_weight" value="{{ form.get('target_weight') or '' }}">
+    </div>
+    <div class="col-md-6 mb-3">
+      <label class="form-label" for="target_adherence">Target Adherence (%)</label>
+      <input class="form-control" type="number" id="target_adherence" name="target_adherence" value="{{ form.get('target_adherence') or '' }}">
+    </div>
+  </div>
+  <button class="btn btn-primary" type="submit">Save</button>
+  <a class="btn btn-secondary" href="{{ url_for('index') }}">Cancel</a>
+</form>
+{% endblock %}

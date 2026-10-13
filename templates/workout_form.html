@@ -1,0 +1,17 @@
+<form class="row g-2 mb-4" method="post" action="{{ url_for('workouts', name=client_name) }}">
+  <div class="col-md-3">
+    <input class="form-control" type="date" name="date" required>
+  </div>
+  <div class="col-md-3">
+    <input class="form-control" name="workout_type" placeholder="Type (e.g. Strength)" required>
+  </div>
+  <div class="col-md-2">
+    <input class="form-control" type="number" name="duration_min" min="1" placeholder="Minutes" required>
+  </div>
+  <div class="col-md-3">
+    <input class="form-control" name="notes" placeholder="Notes">
+  </div>
+  <div class="col-md-1">
+    <button class="btn btn-primary" type="submit">Log</button>
+  </div>
+</form>

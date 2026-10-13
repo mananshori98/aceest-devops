@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}{{ client['name'] }} - ACEest{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h1 class="h3">{{ client['name'] }}</h1>
+  <div>
+    <a class="btn btn-outline-primary" href="{{ url_for('edit_client', name=client['name']) }}">Edit</a>
+    <a class="btn btn-outline-secondary" href="{{ url_for('workouts', name=client['name']) }}">Workouts</a>
+  </div>
+</div>
+
+<dl class="row">
+  <dt class="col-sm-3">Age</dt><dd class="col-sm-9">{{ client['age'] if client['age'] is not none else '-' }}</dd>
+  <dt class="col-sm-3">Height</dt><dd class="col-sm-9">{{ client['height'] if client['height'] is not none else '-' }} cm</dd>
+  <dt class="col-sm-3">Weight</dt><dd class="col-sm-9">{{ client['weight'] if client['weight'] is not none else '-' }} kg</dd>
+  <dt class="col-sm-3">Program</dt><dd class="col-sm-9">{{ client['program'] or '-' }}</dd>
+  <dt class="col-sm-3">Calories</dt><dd class="col-sm-9">{{ client['calories'] if client['calories'] is not none else '-' }} kcal/day</dd>
+  <dt class="col-sm-3">Target Weight</dt><dd class="col-sm-9">{{ client['target_weight'] if client['target_weight'] is not none else '-' }} kg</dd>
+  <dt class="col-sm-3">Target Adherence</dt><dd class="col-sm-9">{{ client['target_adherence'] if client['target_adherence'] is not none else '-' }} %</dd>
+</dl>
+
+<h2 class="h5 mt-4">Weekly Progress</h2>
+<form class="row g-2 mb-3" method="post" action="{{ url_for('log_progress', name=client['name']) }}">
+  <div class="col-auto">
+    <input class="form-control" name="week" placeholder="Week (e.g. 2026-W10)" required>
+  </div>
+  <div class="col-auto">
+    <input class="form-control" type="number" name="adherence" min="0" max="100" placeholder="Adherence %" required>
+  </div>
+  <div class="col-auto">
+    <button class="btn btn-primary" type="submit">Log Progress</button>
+  </div>
+</form>
+{% if progress %}
+<table class="table table-sm">
+  <thead><tr><th>Week</th><th>Adherence (%)</th></tr></thead>
+  <tbody>
+    {% for p in progress %}
+    <tr><td>{{ p['week'] }}</td><td>{{ p['adherence'] }}</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<p class="text-muted">No progress logged yet.</p>
+{% endif %}
+{% endblock %}

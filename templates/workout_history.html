@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Workouts - {{ client_name }} - ACEest{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h1 class="h3">Workouts - {{ client_name }}</h1>
+  <a class="btn btn-outline-secondary" href="{{ url_for('client_detail', name=client_name) }}">Back to profile</a>
+</div>
+
+{% include "workout_form.html" %}
+
+{% if history %}
+<table class="table table-striped">
+  <thead><tr><th>Date</th><th>Type</th><th>Duration (min)</th><th>Notes</th></tr></thead>
+  <tbody>
+    {% for w in history %}
+    <tr>
+      <td>{{ w['date'] }}</td>
+      <td>{{ w['workout_type'] }}</td>
+      <td>{{ w['duration_min'] }}</td>
+      <td>{{ w['notes'] or '' }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<p class="text-muted">No workouts logged yet.</p>
+{% endif %}
+{% endblock %}
