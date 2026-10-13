@@ -16,3 +16,7 @@ Introduction to DevOps Assignment - 1 2026.pdf
 # Virtualenv and Flask instance folder
 .venv/
 instance/
+
+# Flask dev server logs
+flask.out.log
+flask.err.log
