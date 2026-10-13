@@ -1,0 +1,14 @@
+# Python
+__pycache__/
+*.pyc
+*.egg-info/
+.pytest_cache/
+dist/
+
+# SQLite / environment
+*.db
+.env
+
+# Assignment reference material (not part of the Flask project)
+The code versions for DevOps Assignment/
+Introduction to DevOps Assignment - 1 2026.pdf
