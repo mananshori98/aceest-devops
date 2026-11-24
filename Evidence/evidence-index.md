@@ -7,8 +7,8 @@
 
 | No. | Evidence Item | Purpose & Description |
 |---|---|---|
-| 01 | 01_Git_Baseline_Branch_and_Tests.png | Assignment 1 baseline branch & tag (`assignment-1-final`), Assignment 2 feature branch (`feature/assignment-2-cicd`), and clean Git state. |
-| 02 | 02_Local_Pytest_20_Passed_and_Coverage.png | Python syntax validation (`py_compile`), 20 passing Pytest tests, and >85% code coverage report. |
+| 01 | 01_Git_Baseline_Branch_and_Tests.png | Assignment 1 baseline branch & tag (`assignment-1-final`), backup branch, Assignment 2 feature branch (`feature/assignment-2-cicd`), 19 passing baseline tests on the tag, and clean Git state. Reproduce with `01_baseline_evidence.ps1`. |
+| 02 | 02_Local_Pytest_20_Passed_and_Coverage_part_A.png, 02_Local_Pytest_20_Passed_and_Coverage_part_B.png | Python syntax validation (`py_compile`), 20 passing Pytest tests, 91% coverage of `app.py` (part A), and the list of files changed since the Assignment 1 baseline (part B). Reproduce with `02_local_validation_evidence.ps1`. |
 | 03 | 03_GitHub_Actions_Success.png | GitHub Actions workflow execution history demonstrating green build status. |
 | 04 | 04_GitHub_Actions_Test_and_Build_Success.png | Detailed step logs for syntax validation, Pytest execution, and Docker build/in-container test. |
 | 05 | 05_Pull_Request_All_Checks_Passed.png | GitHub Pull Request with automated CI status checks passing without merge conflicts. |
