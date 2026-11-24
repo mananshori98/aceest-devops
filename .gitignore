@@ -14,9 +14,13 @@ coverage.xml
 *.db
 .env
 
-# Assignment reference material (not part of the Flask project)
+# Assignment reference material (strictly excluded from Git repository)
 The code versions for DevOps Assignment/
+versions/
 *.pdf
+*.zip
+2025TM*
+reference/
 
 # Virtualenv and Flask instance folder
 .venv/
