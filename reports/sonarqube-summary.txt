@@ -1,0 +1,13 @@
+ACEest Fitness DevOps Assignment 2
+Student Name: Manan Shori
+Roll Number: 2025TM93143
+SonarQube Project Key: aceest-fitness-devops
+Application Version: 2.0.0
+Quality Gate: PASSED
+Bugs: 0
+Vulnerabilities: 0
+Security Hotspots: 0
+Code Smells: 0
+Coverage: 90.9%
+Duplicated Lines: 0.0%
+Analysis executed through Jenkins Pipeline with SonarScanner.

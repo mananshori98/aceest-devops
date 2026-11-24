@@ -1,56 +1,37 @@
-name: CI/CD
+name: ACEest Assignment 2 CI
 
 on:
   push:
-    branches: [main]
+    branches: [main, feature/assignment-2-cicd]
   pull_request:
     branches: [main]
 
 jobs:
-  build-lint:
+  test-and-build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout source
+        uses: actions/checkout@v4
 
-      - uses: actions/setup-python@v5
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+          cache: pip
 
-      - name: Install dependencies from requirements.txt
-        run: pip install -r requirements.txt
-
-      # Lint tool is pinned inline so it never alters requirements.txt
-      - name: Lint with flake8
+      - name: Install dependencies
         run: |
-          pip install flake8==7.2.0
-          flake8 app.py tests/
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
 
-  docker-build:
-    runs-on: ubuntu-latest
-    needs: build-lint
-    steps:
-      - uses: actions/checkout@v4
+      - name: Validate syntax
+        run: python -m py_compile app.py
+
+      - name: Run tests with coverage
+        run: python -m pytest -q --cov=app --cov-report=term --cov-report=xml
 
       - name: Build Docker image
-        run: docker build -t aceest-app .
+        run: docker build -t aceest-fitness:${{ github.sha }} .
 
-      - name: Run Pytest inside the container
-        run: docker run --rm aceest-app pytest --tb=short
-
-  push:
-    runs-on: ubuntu-latest
-    needs: docker-build
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-    steps:
-      - uses: actions/checkout@v4
-
-      - uses: docker/login-action@v3
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
-
-      - name: Build, tag and push image
-        run: |
-          docker build -t aceest-app .
-          docker tag aceest-app ${{ secrets.DOCKER_USERNAME }}/aceest-app:latest
-          docker push ${{ secrets.DOCKER_USERNAME }}/aceest-app:latest
+      - name: Run tests inside Docker image
+        run: docker run --rm aceest-fitness:${{ github.sha }} python -m pytest -q

@@ -1,0 +1,17 @@
+ACEest Fitness DevOps Assignment 2
+Student Name: Manan Shori
+Roll Number: 2025TM93143
+GitHub: https://github.com/mananshori98/aceest-devops
+Docker Hub: https://hub.docker.com/r/mananshori98/aceest-fitness-devops
+Jenkins Job: ACEest-Assignment-2-Pipeline
+Jenkins Build: SUCCESS
+SonarQube Quality Gate: PASSED
+Application Version: 2.0.0
+Deployment Strategies Configured & Validated:
+- Base Kubernetes deployment (base.yaml)
+- Rolling Update (maxUnavailable: 0, maxSurge: 1)
+- Rollback (kubectl rollout undo)
+- Blue-Green Deployment (blue-green.yaml)
+- Canary Release (canary.yaml, 75/25 split)
+- Shadow Deployment (shadow.yaml, NGINX mirror-target)
+- A/B Testing (ab-testing.yaml, header-based canary routing)

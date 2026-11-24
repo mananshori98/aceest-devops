@@ -6,3 +6,10 @@ __pycache__/
 .venv/
 instance/
 .pytest_cache/
+.coverage
+coverage.xml
+.scannerwork/
+kubernetes/
+reports/
+Evidence/
+*.md
